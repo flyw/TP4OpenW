@@ -28,6 +28,7 @@ opkg list | grep libustream | grep tls
 opkg install libustream-mbedtls20150806
 cd /etc
 wget https://raw.githubusercontent.com/flyw/config-openwrt/master/dnsmasq-tinylist.conf?token=AAFIQODN4MZS4HHPXCSAGIC6N4K2O
+# wget http://git.joydata.com/snippets/25/raw
 cat dnsmasq-tinylist.conf >> dnsmasq.conf
 ```  
 
