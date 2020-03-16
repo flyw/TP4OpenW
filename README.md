@@ -26,9 +26,9 @@ opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks
 ```bash
 opkg list | grep libustream | grep tls
 opkg install libustream-mbedtls20150806
-wget https://raw.githubusercontent.com/flyw/config-openwrt/master/tinylist-to-dnsmasq.py
-chmod a+x tinylist-to-dnsmasq.py
-./tinylist-to-dnsmasq.py
+cd /etc
+wget https://raw.githubusercontent.com/flyw/config-openwrt/master/dnsmasq-tinylist.conf?token=AAFIQODN4MZS4HHPXCSAGIC6N4K2O
+cat dnsmasq-tinylist.conf >> dnsmasq.conf
 ```  
 
 ### Start Services On Starup
