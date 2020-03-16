@@ -24,7 +24,7 @@ opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks
 
 ### UPDATE DNSMASQ
 ```bash
-curl -sL https://raw.githubusercontent.com/flyw/config-openwrt/master/tinylist-to-dnsmasq.py | sudo bash -
+curl -sL https://raw.githubusercontent.com/flyw/config-openwrt/master/tinylist-to-dnsmasq.py | bash -
 ```  
 
 ### Start Services On Starup
