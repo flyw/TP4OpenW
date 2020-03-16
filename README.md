@@ -47,4 +47,5 @@ cat rc.local > /etc/rc.local
 ### References
 * https://github.com/gfwlist/gfwlist
 * https://snippets.cacher.io/snippet/c74f02a2b546ab0fbc6a#F1
+* https://github.com/lixingcong/my-gfwlist/blob/master/README.md
 
