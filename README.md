@@ -4,7 +4,7 @@
 > At least 10M free space is required.
 ```bash
 opkg update
-opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks ipset python
+opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks ipset
 ```
 
 ### Config autossh
