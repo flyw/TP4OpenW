@@ -36,7 +36,7 @@ socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
 exit 0
 ```
 
-### Reference
+### References
 * https://github.com/gfwlist/gfwlist
 * https://snippets.cacher.io/snippet/c74f02a2b546ab0fbc6a#F1
 
