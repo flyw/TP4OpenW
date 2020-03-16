@@ -17,7 +17,7 @@ mydnsip = '127.0.0.1'
 mydnsport = '55'
  
 # the url of gfwlist
-baseurl = 'https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt'
+baseurl = 'https://raw.githubusercontent.com/gfwlist/tinylist/master/tinylist.txt'
 # match comments/title/whitelist/ip address
 comment_pattern = '^\!|\[|^@@|^\d+\.\d+\.\d+\.\d+'
 domain_pattern = '([\w\-\_]+\.[\w\.\-\_]+)[\/\*]*' 
