@@ -5,6 +5,9 @@
 ```bash
 opkg update
 opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks ipset
+opkg list | grep libustream | grep tls
+# 安装 tls 扩展，该扩展用于 wget https 
+opkg install libustream-mbedtls20150806
 ```
 
 ### Config autossh
@@ -24,12 +27,14 @@ opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks
 
 ### UPDATE DNSMASQ
 ```bash
-opkg list | grep libustream | grep tls
-opkg install libustream-mbedtls20150806
-cd /tmp
-wget https://raw.githubusercontent.com/flyw/config-openwrt/master/dnsmasq-tinylist.conf?token=AAFIQODN4MZS4HHPXCSAGIC6N4K2O
+
+cd /tmp/tmp
+wget https://raw.githubusercontent.com/flyw/config-openwrt/master/tinylist?token=AAFIQOBI32IZMHKKH2MQAGS6N4VVK
 # wget http://git.joydata.com/snippets/25/raw
-cat dnsmasq-tinylist.conf >> /etc/dnsmasq.conf
+wget https://raw.githubusercontent.com/flyw/config-openwrt/master/create_dnsmasq_conf.sh?token=AAFIQOHWKFDPNUDKODMDK626N4VSW
+chmod a+x create_dnsmasq_conf.sh
+./create_dnsmasq_conf.sh tinylist
+cat dnsmasq.conf >> /etc/dnsmasq.conf
 ```  
 
 ### Start Services On Starup
