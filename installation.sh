@@ -1,7 +1,7 @@
 #!/bin/sh
 
 opkg update
-opkg install openssh-server openssh-client openssh-keygen autossh socat redsocks ipset
+opkg install openssh-client openssh-keygen autossh socat redsocks ipset
 
 # Install libustream tls
 # opkg list | grep libustream | grep tls
