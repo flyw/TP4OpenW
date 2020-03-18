@@ -1,6 +1,5 @@
 #!/bin/sh
 
-opkg update
 opkg install openssh-client openssh-keygen autossh socat redsocks ipset
 
 # Install libustream tls
