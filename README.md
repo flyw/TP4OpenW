@@ -4,7 +4,7 @@
 
 ```bash
 opkg update
-opkg install git
+opkg install git-http
 git clone https://github.com/flyw/TP4OpenW.git
 cd TP4OpenW
 chmod a+x *.sh
