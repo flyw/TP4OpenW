@@ -5,10 +5,11 @@
 ```bash
 sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
-opkg install git-http
+opkg install openssh-client
 git clone https://github.com/flyw/TP4OpenW.git
+# or scp ...
+
 cd TP4OpenW
-chmod a+x *.sh
 ./installation.sh
 ```
 
