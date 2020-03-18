@@ -1,6 +1,7 @@
 # TP4OpenW
 
-### Install Required Packages
+### Install
+
 ```bash
 opkg update
 opkg install git
@@ -25,19 +26,17 @@ chmod a+x *.sh
   ssh root@[UPSTREAM_IP]
   ```
 
-### UPDATE DNSMASQ
-```bash
+### Config rc.local
 
-./create_dnsmasq_conf.sh tinylist
-cat dnsmasq.conf >> /tmp/dnsmasq.d/tinylist.conf
+```bash
+vi /etc/rc.local
+```
+
+```conf
+/root/TP4OpenW/startup.sh /root/TPOpenW/tinylist
+# /root/TP4OpenW/startup.sh /root/TPOpenW/fulllist
 ```  
 
-### Start Services On Starup
-```bash
-cd /tmp/tmp
-
-cat rc.local > /etc/rc.local
-```
 
 ### References
 * https://github.com/gfwlist/gfwlist
