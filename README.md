@@ -3,7 +3,7 @@
 ### Install
 
 ```bash
-sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/lede/g' /etc/opkg/distfeeds.conf
+sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
 opkg install git-http
 git clone https://github.com/flyw/TP4OpenW.git
