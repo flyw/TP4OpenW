@@ -2,13 +2,10 @@
 
 ### Install Required Packages
 ```bash
-wget https://raw.githubusercontent.com/flyw/OpenWRT-TSP/master/setup.sh
-wget https://raw.githubusercontent.com/flyw/OpenWRT-TSP/master/create_dnsmasq_conf.sh
-wget https://raw.githubusercontent.com/flyw/OpenWRT-TSP/master/tinylist
-wget https://raw.githubusercontent.com/flyw/OpenWRT-TSP/master/rc.local
-
-# wget http://git.joydata.com/snippets/25/raw
-
+opkg update
+opkg install git
+git clone https://github.com/flyw/TP4OpenW.git
+cd TP4OpenW
 chmod a+x *.sh
 ./installation.sh
 ```
