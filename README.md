@@ -5,7 +5,7 @@
 ```bash
 sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
-opkg install openssh-client
+opkg install openssh-client unzip
 scp %:/tmp/master.zip .
 unzip master.zip
 mv TP4OpenW-master TP4OpenW
