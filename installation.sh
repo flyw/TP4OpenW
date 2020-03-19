@@ -9,4 +9,6 @@ tls_line=$(opkg list | grep libustream | grep tls)
 tls_package=$(echo "$tls_line"  | head -n1 | cut -d " " -f1)
 opkg install ${tls_package}
 
+cp c.local.example rc.local
+
 ssh-keygen

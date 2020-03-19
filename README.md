@@ -6,17 +6,15 @@
 sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
 opkg install openssh-client
-git clone https://github.com/flyw/TP4OpenW.git
-# or scp ...
-
-cd TP4OpenW
-./installation.sh
+scp @:/tmp/master.zip .
+unzip master.zip
+mv TP4OpenW-master TP4OpenW
+/root/TP4OpenW/installation.sh
 ```
 
 ### Config autossh
 > ON ROUTE
   ```bash
-  ssh-keygen
   scp /root/.ssh/id_rsa.pub root@[UPSTREAM_IP]:/tmp/id_rsa.pub
   ```
 > ON UPSTREAM_SERVER
@@ -31,7 +29,8 @@ cd TP4OpenW
 ### Config rc.local
 
 ```bash
-vi /etc/rc.local
+cp 
+cp /root/TP4OpenW/rc.local /etc/rc.local
 ```
 
 ```conf

@@ -1,0 +1,26 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+sleep 10
+touch /tmp/system-startup
+
+autossh -M 60000 -f -C -L 0.0.0.0:49080:localhost:49080 -N root@[UPSTREAM_IP]
+autossh -M 60002 -f -C -L 5353:localhost:5353 -N root@[UPSTREAM_IP]
+socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
+
+
+/root/TP4OpenW/update_conf.sh tinylist
+/etc/init.d/dnsmasq restart
+
+iptables -t nat -N REDSOCKS
+iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+iptables -t nat -A REDSOCKS -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 12345
+
+exit 0
