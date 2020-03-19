@@ -26,16 +26,9 @@ mv TP4OpenW-master TP4OpenW
   ssh root@[UPSTREAM_IP]
   ```
 
-### Config Redsocks
-```bash
-vi /etc/redsocks.conf
-reboot
-```
-
 ### Config rc.local
 
 ```bash
-cp /root/TP4OpenW/rc.local.example /etc/rc.local
 vi /etc/rc.local
 reboot
 ```
