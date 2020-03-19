@@ -6,7 +6,7 @@
 sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
 opkg install openssh-client
-scp @:/tmp/master.zip .
+scp %:/tmp/master.zip .
 unzip master.zip
 mv TP4OpenW-master TP4OpenW
 /root/TP4OpenW/installation.sh
@@ -29,19 +29,13 @@ mv TP4OpenW-master TP4OpenW
 ### Config rc.local
 
 ```bash
-cp 
-cp /root/TP4OpenW/rc.local /etc/rc.local
+cp /root/TP4OpenW/rc.local.example /etc/rc.local
+vi /etc/rc.local
+reboot
 ```
-
-```conf
-/root/TP4OpenW/startup.sh /root/TPOpenW/tinylist
-# /root/TP4OpenW/startup.sh /root/TPOpenW/fulllist
-```  
-
 
 ### References
 * https://github.com/gfwlist/gfwlist
 * https://snippets.cacher.io/snippet/c74f02a2b546ab0fbc6a#F1
 * https://github.com/lixingcong/my-gfwlist/blob/master/README.md
 * https://github.com/cokebar/gfwlist2dnsmasq
-
