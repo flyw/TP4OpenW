@@ -12,8 +12,8 @@ ipset create gfwlist hash:ip counters timeout 1200
 autossh -M 60000 -f -C -L 0.0.0.0:49080:localhost:49080 -N root@[UPSTREAM_IP]
 autossh -M 60002 -f -C -R 0.0.0.0:61002:localhost:22 -N root@[UPSTREAM_IP]
 
-# autossh -M 60002 -f -C -L 5353:localhost:5353 -N root@[UPSTREAM_IP]
-# socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
+autossh -M 60002 -f -C -L 5353:localhost:5353 -N root@[UPSTREAM_IP]
+socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
 
 iptables -t nat -N REDSOCKS
 iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
