@@ -2,7 +2,8 @@
 
 opkg remove dnsmasq
 opkg install dnsmasq-full
-opkg install openssh-client openssh-keygen autossh socat redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd
+opkg install openssh-client openssh-keygen autossh redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd
+#opkg install socat
 
 # Install libustream tls
 # opkg list | grep libustream | grep tls

@@ -26,10 +26,13 @@ mv TP4OpenW-master TP4OpenW
   ssh root@[UPSTREAM_IP]
   ```
 
-### Config rc.local
+### Config 
 
 ```bash
-vi /etc/rc.local
+vi /etc/rc.local 
+# Update [UPSTREAM_IP]
+vi update_conf.local 
+# Update [UPSTREAM_IP] and [UPSTREAM_PORT]
 reboot
 ```
 
