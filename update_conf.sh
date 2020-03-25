@@ -12,7 +12,7 @@ fi
 
 echo 'Generate /tmp/dnsmasq.d/gfwlist.conf...'
 echo '' > /tmp/dnsmasq.d/gfwlist.conf
-sed "s/.*/server=\/&\[UPSTREAM_IP]#[UPSTREAM_PORT]/" $file >> /tmp/dnsmasq.d/gfwlist.conf
+sed "s/.*/server=\/&\/[UPSTREAM_IP]#[UPSTREAM_PORT]/" $file >> /tmp/dnsmasq.d/gfwlist.conf
 sed "s/.*/ipset=\/&\/gfwlist/" $file >> /tmp/dnsmasq.d/gfwlist.conf
 echo "Success."
 
