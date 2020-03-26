@@ -2,7 +2,7 @@
 
 opkg remove dnsmasq
 opkg install dnsmasq-full
-opkg install openssh-client openssh-keygen autossh redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd
+opkg install openssh-client openssh-keygen redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd sshtunnel
 opkg install socat
 
 # Install libustream tls
@@ -15,5 +15,6 @@ opkg install socat
 cp etc/rc.local /etc/rc.local
 cp etc/redsocks.conf /etc/redsocks.conf
 cp etc/crontabs/root /etc/crontabs/root
+cp etc/config/sshtunnel /etc/config/sshtunnel
 
 ssh-keygen
