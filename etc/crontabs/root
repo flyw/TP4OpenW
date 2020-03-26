@@ -1,3 +1,3 @@
 0 * * * * killall -9 socat; socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
 # This is UTC hour
-0 5 * * * sleep 70 && touch /etc/banner && reboot
+0 21 * * * sleep 70 && touch /etc/banner && reboot
