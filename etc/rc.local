@@ -8,10 +8,6 @@ ipset create gfwlist hash:ip counters timeout 1200
 /root/TP4OpenW/update_conf.sh /root/TP4OpenW/lists/list
 /etc/init.d/dnsmasq restart
 
-# !!! Modify: [60000][60002][61002][UPSTREAM_IP]
-autossh -M 0 -f -o ServerAliveInterval=30 -o ServerAliveCountMax=2 -C -L 0.0.0.0:49080:localhost:49080 -N root@[UPSTREAM_IP]
-autossh -M 0 -o ServerAliveInterval=30 -o ServerAliveCountMax=2 -f -C -R 0.0.0.0:61002:localhost:22 -N root@[UPSTREAM_IP]
-autossh -M 0 -o ServerAliveInterval=30 -o ServerAliveCountMax=2 -f -C -L 5353:localhost:5353 -N root@[UPSTREAM_IP]
 socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
 
 iptables -t nat -N REDSOCKS
