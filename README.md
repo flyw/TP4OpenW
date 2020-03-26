@@ -29,7 +29,7 @@ mv TP4OpenW-master TP4OpenW
 ### Config 
 
 ```bash
-vi /etc/rc.local 
+vi /etc/config/autossh
 # Update [UPSTREAM_IP]
 reboot
 ```
