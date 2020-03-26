@@ -14,5 +14,6 @@ opkg install socat
 
 cp etc/rc.local /etc/rc.local
 cp etc/redsocks.conf /etc/redsocks.conf
+cp etc/crontabs/root /etc/crontabs/root
 
 ssh-keygen

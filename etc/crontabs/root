@@ -1,0 +1,2 @@
+0 * * * * killall -9 socat; socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
+0 5 * * * reboot
