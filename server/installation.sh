@@ -4,7 +4,7 @@ apt install autossh dante-server socat -y
 systemctl enable danted
 
 cp danted.conf /etc/danted.conf
-cp startService.sh /etc/startService.sh
+cp startService.sh /root/startService.sh
 chmod a+x /root/startService.sh
 systemctl restart danted
 
@@ -14,4 +14,4 @@ line="@reboot /root/startService.sh"
 (crontab -u root -l; echo "$line" ) | crontab -u root -
 
 ssh-keygen
-ssh-copy-id [%]
+echo "Run ssh-copy-id [%]"
