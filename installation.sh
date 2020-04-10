@@ -17,4 +17,6 @@ cp etc/redsocks.conf /etc/redsocks.conf
 cp etc/crontabs/root /etc/crontabs/root
 cp etc/config/autossh /etc/config/autossh
 
+touch /root/custom.list
+
 ssh-keygen

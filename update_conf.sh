@@ -18,5 +18,11 @@ sed "s/.*/ipset=\/&\/gfwlist/" $file >> /tmp/dnsmasq.d/gfwlist.conf
 sed "s/.*/server=\/&\/127.0.0.1#55/" /root/TP4OpenW/lists/custom >> /tmp/dnsmasq.d/gfwlist.conf
 sed "s/.*/ipset=\/&\/gfwlist/" /root/TP4OpenW/lists/custom >> /tmp/dnsmasq.d/gfwlist.conf
 
+FILE=/root/custom.list
+if test -f "$FILE"; then
+  sed "s/.*/server=\/&\/127.0.0.1#55/" /root/custom.list >> /tmp/dnsmasq.d/gfwlist.conf
+  sed "s/.*/ipset=\/&\/gfwlist/" /root/custom.list >> /tmp/dnsmasq.d/gfwlist.conf
+fi
+
 echo "Success."
 
