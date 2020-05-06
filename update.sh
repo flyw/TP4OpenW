@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if test -f "/root/TP4OpenW/update.sh"; then
+    cp /root/TP4OpenW/update.sh /root/update.sh
+fi
+
 rm -f /root/master.zip
 wget https://github.com/flyw/TP4OpenW/archive/master.zip -O /root/master.zip
 unzip /root/master.zip -d /root
