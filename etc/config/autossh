@@ -1,5 +1,5 @@
 config autossh
-        option ssh  '-C -L 0.0.0.0:49080:localhost:49080 -L 45353:localhost:45353 -R 60012:localhost:22 -o ServerAliveInterval=30 -o ServerAliveCountMax=2 -N root@[UPSTREAM_IP]'
+        option ssh  '-C -L 0.0.0.0:49080:localhost:49080 -L 0.0.0.0:45353:localhost:45353 -R 60012:localhost:22 -o ServerAliveInterval=30 -o ServerAliveCountMax=2 -N root@[UPSTREAM_IP]'
         option gatetime '0'
         option monitorport      '60010'
         option poll     '600'
