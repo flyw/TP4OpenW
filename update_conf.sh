@@ -1,28 +1,19 @@
 #!/bin/sh
 
-# ./update_conf.sh [filename]
+#forward-zone:
+#        name: "baidu.com"
+#        forward-addr: 192.168.99.1@45353
+#forward-zone:
+#        name: "sina.com.cn"
+#        forward-addr: 192.168.99.1@45353
 
-file="$1"
+echo 'Generate /var/lib/unbound/unbound_ext.conf...'
+cp /etc/unbound/unbound_ext.conf /var/lib/unbound/unbound_ext.conf
+chown unbound:unbound /var/lib/unbound/unbound_ext.conf
 
-if [ $# -eq 0 ]
-  then
-    echo "Missing file: ./update_conf.sh [filename]"
-    exit 0
-fi
-
-echo 'Generate /tmp/dnsmasq.d/gfwlist.conf...'
-echo '' > /tmp/dnsmasq.d/gfwlist.conf
-sed "s/.*/server=\/&\/127.0.0.1#55/" $file >> /tmp/dnsmasq.d/gfwlist.conf
-sed "s/.*/ipset=\/&\/gfwlist/" $file >> /tmp/dnsmasq.d/gfwlist.conf
-
-sed "s/.*/server=\/&\/127.0.0.1#55/" /root/TP4OpenW/lists/custom >> /tmp/dnsmasq.d/gfwlist.conf
-sed "s/.*/ipset=\/&\/gfwlist/" /root/TP4OpenW/lists/custom >> /tmp/dnsmasq.d/gfwlist.conf
-
-FILE=/root/custom.list
-if test -f "$FILE"; then
-  sed "s/.*/server=\/&\/127.0.0.1#55/" /root/custom.list >> /tmp/dnsmasq.d/gfwlist.conf
-  sed "s/.*/ipset=\/&\/gfwlist/" /root/custom.list >> /tmp/dnsmasq.d/gfwlist.conf
-fi
+sed "s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 192.168.99.1@45353/" /root/TP4OpenW/lists/list >> /var/lib/unbound/unbound_ext.conf
+sed "s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 192.168.99.1@45353/" /root/TP4OpenW/lists/custom >> /var/lib/unbound/unbound_ext.conf
+sed "s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 192.168.99.1@45353/" /root/custom >> /var/lib/unbound/unbound_ext.conf
 
 /etc/init.d/unbound restart
 echo "Success."
