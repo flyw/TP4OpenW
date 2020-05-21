@@ -1,6 +1,8 @@
 #!/bin/sh
 
 opkg install openssh-client openssh-keygen autossh redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd unbound-daemon
+opkg remove dnsmasq
+opkg install dnsmasq-full
 sed -i 's/=53/=45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/ 53/ 45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/"53"/"45355"/g' /usr/lib/unbound/unbound.sh
