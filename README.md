@@ -7,8 +7,7 @@ sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/op
 opkg update
 tls_line=$(opkg list | grep libustream | grep tls)
 tls_package=$(echo "$tls_line"  | head -n1 | cut -d " " -f1)
-opkg install ${tls_package}
-opkg install unzip
+opkg install ${tls_package} unzip
 wget https://github.com/flyw/TP4OpenW/archive/master.zip -O master.zip
 unzip master.zip
 mv TP4OpenW-master TP4OpenW
