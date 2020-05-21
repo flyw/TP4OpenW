@@ -5,8 +5,11 @@
 ```bash
 sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' /etc/opkg/distfeeds.conf
 opkg update
-opkg install openssh-client unzip
-scp %:/tmp/master.zip .
+tls_line=$(opkg list | grep libustream | grep tls)
+tls_package=$(echo "$tls_line"  | head -n1 | cut -d " " -f1)
+opkg install ${tls_package}
+opkg install unzip
+wget https://github.com/flyw/TP4OpenW/archive/master.zip -O master.zip
 unzip master.zip
 mv TP4OpenW-master TP4OpenW
 /root/TP4OpenW/installation.sh

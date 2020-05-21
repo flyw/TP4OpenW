@@ -24,5 +24,6 @@ if test -f "$FILE"; then
   sed "s/.*/ipset=\/&\/gfwlist/" /root/custom.list >> /tmp/dnsmasq.d/gfwlist.conf
 fi
 
+/etc/init.d/unbound restart
 echo "Success."
 

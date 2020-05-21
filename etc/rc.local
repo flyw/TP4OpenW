@@ -6,9 +6,6 @@ touch /tmp/system-startup
 
 ipset create gfwlist hash:ip counters timeout 1200
 /root/TP4OpenW/update_conf.sh /root/TP4OpenW/lists/list
-/etc/init.d/dnsmasq restart
-
-socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
 
 iptables -t nat -N REDSOCKS
 iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
@@ -23,3 +20,11 @@ iptables -t nat -A REDSOCKS -p tcp -m set --match-set gfwlist dst -j REDIRECT --
 iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
 
 exit 0
+
+
+forward-zone:
+        name: "baidu.com"
+        forward-addr: 192.168.99.1@45353
+forward-zone:
+        name: "sina.com.cn"
+        forward-addr: 192.168.99.1@45353

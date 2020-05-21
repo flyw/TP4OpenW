@@ -1,4 +1,3 @@
-0 * * * * killall -9 socat; socat udp4-listen:55,reuseaddr,fork tcp:localhost:5353 &
-0 20 * * * /root/TP4OpenW/sync_list.sh
 # This is UTC hour
+0 20 * * * /root/TP4OpenW/sync_list.sh
 0 21 * * * sleep 70 && touch /etc/banner && reboot

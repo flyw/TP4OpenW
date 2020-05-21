@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -f /tmp/tmp/list
+
 wget https://raw.githubusercontent.com/flyw/TP4OpenW/master/lists/list  -O /tmp/tmp/list -q
 
 NEWFILE=/tmp/tmp/list
