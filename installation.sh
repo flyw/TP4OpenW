@@ -1,6 +1,6 @@
 #!/bin/sh
 
-opkg install openssh-client openssh-keygen autossh redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd isc-dhcp-server-ipv4 luci-app-unbound
+opkg install openssh-client openssh-keygen autossh redsocks ipset iptables-mod-nat-extra ttyd luci-app-ttyd luci-app-unbound
 sed -i 's/=53/=45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/ 53/ 45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/"53"/"45355"/g' /usr/lib/unbound/unbound.sh
