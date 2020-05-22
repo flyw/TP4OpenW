@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if test -f "/root/TP4OpenW/update.sh"; then
-    cp /root/TP4OpenW/update.sh /root/update.sh
+if test -f "/root/TP4OpenW/reinstall.sh"; then
+    cp /root/TP4OpenW/reinstall.sh /root/reinstall.sh
 fi
 
 rm -f /root/master.zip
