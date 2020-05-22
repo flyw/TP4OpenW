@@ -2,7 +2,7 @@
 
 rm -f /tmp/tmp/custom
 
-wget https://raw.githubusercontent.com/flyw/TP4OpenW/master/lists/custom  -O /tmp/tmp/list -q
+wget https://raw.githubusercontent.com/flyw/TP4OpenW/master/lists/custom  -O /tmp/tmp/custom -q
 
 NEWFILE=/tmp/tmp/custom
 OLDFILE=/root/TP4OpenW/lists/custom
