@@ -14,3 +14,6 @@ if test -f "$NEWFILE"; then
         echo "List synced."
     fi
 fi
+echo "Restart DNS ..."
+/root/TP4OpenW/update_conf.sh
+/etc/init.d/unbound restart
