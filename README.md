@@ -21,7 +21,7 @@ mv TP4OpenW-master TP4OpenW
   ```
 > ON UPSTREAM_SERVER
   ```bash
-  cat /tmp/id_rsa.pub >> /root/authorized_keys
+  cat /tmp/id_rsa.pub >> /root/.ssh/authorized_keys
   ```
 > ON ROUTE
   ```bash
