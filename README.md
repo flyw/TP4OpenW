@@ -2,7 +2,7 @@
 
 ### Notice：
 
-*** This script works only on 19.07* ***
+***This script works only on 19.07****
 
 ### Install
 
