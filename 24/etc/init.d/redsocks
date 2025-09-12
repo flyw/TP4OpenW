@@ -1,0 +1,71 @@
+#!/bin/sh /etc/rc.common
+
+START=95
+STOP=15
+
+SERVICE_USE_PID=1
+SERVICE_WRITE_PID=1
+SERVICE_DAEMONIZE=1
+
+CONFIG=/etc/redsocks.conf
+
+get_args() {
+	config_get_bool enable $1 enable
+	config_get_bool global $1 global
+	config_get local_port $1 local_port
+	config_get proxy_type $1 proxy_type
+	config_get proxy_ip $1 proxy_ip
+	config_get proxy_port $1 proxy_port
+}
+
+start_redsocks() {
+	service_start /usr/sbin/redsocks -c $CONFIG || exit 1
+
+  ipset create gfwlist hash:ip counters timeout 1200 || true
+
+	# Add redir rules
+	iptables -t nat -N REDSOCKS
+	iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
+	iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+
+	# bypass local domain
+	iptables -t nat -A REDSOCKS -d $proxy_ip -j RETURN
+	iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 100.64.0.0/10 -j RETURN
+	iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+	iptables -t nat -A REDSOCKS -d 192.0.0.0/24 -j RETURN
+	iptables -t nat -A REDSOCKS -d 192.0.2.0/24 -j RETURN
+	iptables -t nat -A REDSOCKS -d 192.88.99.0/24 -j RETURN
+	iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS -d 198.18.0.0/15 -j RETURN
+	iptables -t nat -A REDSOCKS -d 198.51.100.0/24 -j RETURN
+	iptables -t nat -A REDSOCKS -d 203.0.113.0/24 -j RETURN
+	iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS -d 255.255.255.255 -j RETURN
+
+	if [ "$global" = "1" ]; then
+  		echo "Redsocks: Activating Global Proxy Mode."
+  		iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports $local_port
+  	else
+  		echo "Redsocks: Activating GFWList Proxy Mode."
+  		iptables -t nat -A REDSOCKS -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports $local_port
+  	fi
+
+}
+
+start() {
+	config_load redsocks
+	config_foreach get_args redsocks
+	[ "$enable" = 1 ] && start_redsocks
+}
+
+stop() {
+	service_stop /usr/sbin/redsocks
+	iptables -t nat -D OUTPUT -p tcp -j REDSOCKS
+	iptables -t nat -D PREROUTING -p tcp -j REDSOCKS
+	iptables -t nat -F REDSOCKS && iptables -t nat -X REDSOCKS
+}

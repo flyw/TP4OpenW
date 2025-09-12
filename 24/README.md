@@ -2,7 +2,7 @@
 
 ### Notice：
 
-***This script works only on 24.10****
+*** This script works only on 24.10 and XiMi R4A v2 ( 1_000 M ) ****
 
 ### Install
 
@@ -15,13 +15,13 @@ opkg install ${tls_package} unzip
 wget https://github.com/flyw/TP4OpenW/archive/master.zip -O master.zip
 unzip master.zip
 mv TP4OpenW-master TP4OpenW
-/root/TP4OpenW/installation.sh
+/root/TP4OpenW/24/installation.sh
 ```
 
 ### Config autossh
 > ON ROUTE
   ```bash
-  scp /root/.ssh/id_rsa.pub root@[UPSTREAM_IP]:/tmp/id_rsa.pub
+  scp -oHostKeyAlgorithms=+ssh-rsa /root/.ssh/id_rsa.pub root@[UPSTREAM_IP]:/tmp/id_rsa.pub
   ```
 > ON UPSTREAM_SERVER
   ```bash
@@ -29,7 +29,7 @@ mv TP4OpenW-master TP4OpenW
   ```
 > ON ROUTE
   ```bash
-  ssh root@[UPSTREAM_IP]
+  ssh -oHostKeyAlgorithms=+ssh-rsa root@[UPSTREAM_IP]
   ```
 
 ### Config 

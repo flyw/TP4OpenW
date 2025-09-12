@@ -1,9 +1,15 @@
 #!/bin/sh
 
-opkg install openssh-client openssh-keygen autossh ipset iptables-mod-nat-extra unbound-daemon
-opkg install /root/TP4OpenW/24/redsocks-dev_0.5-20161228-r1_mipsel_24kc.ipk
+opkg install openssh-client openssh-keygen autossh ipset iptables-mod-nat-extra unbound-daemon iptables-zz-legacy
 opkg remove dnsmasq
-opkg install dnsmasq-full
+rm /etc/config/dhcp
+opkg install /root/TP4OpenW/24/dnsmasq-full_2.90-r4_mipsel_24kc.ipk
+opkg install /root/TP4OpenW/24/redsocks-dev_0.5-20161228-r1_mipsel_24kc.ipk
+
+sed -i "/^config dnsmasq$/a \        option confdir '/tmp/dnsmasq.d'" /etc/config/dhcp
+
+/etc/init.d/dnsmasq restart
+
 sed -i 's/=53/=45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/ 53/ 45355/g' /usr/lib/unbound/unbound.sh
 sed -i 's/"53"/"45355"/g' /usr/lib/unbound/unbound.sh
@@ -15,9 +21,11 @@ sed -i '\|  cp -p $UB_ETCDIR/root\.\* $UB_VARDIR/|a \  /root/TP4OpenW/update_con
 /etc/init.d/unbound restart
 
 cp /root/TP4OpenW/24/etc/rc.local /etc/rc.local
-cp /root/TP4OpenW/etc/redsocks.conf /etc/redsocks.conf
+cp /root/TP4OpenW/24/etc/redsocks.conf /etc/redsocks.conf
 cp /root/TP4OpenW/etc/crontabs/root /etc/crontabs/root
 cp /root/TP4OpenW/etc/config/autossh /etc/config/autossh
+cp /root/TP4OpenW/24/etc/config/redsock /etc/config/redsock
+cp /root/TP4OpenW/24/etc/init.d/redsock /etc/init.d/redsock
 
 touch /root/custom.list
 
