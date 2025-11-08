@@ -22,11 +22,21 @@ start_redsocks() {
 	service_start /usr/sbin/redsocks -c $CONFIG || exit 1
 
   ipset create gfwlist hash:ip counters timeout 1200 || true
+  ipset create blocklist hash:ip counters timeout 1200 || true
 
 	# Add redir rules
 	iptables -t nat -N REDSOCKS
+	iptables -t nat -N BLOCKTRAFFIC
 	iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
 	iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+
+	# Add block traffic rules for blocked domains
+	iptables -t nat -A OUTPUT -p tcp -m set --match-set blocklist dst -j BLOCKTRAFFIC
+	iptables -t nat -A OUTPUT -p udp -m set --match-set blocklist dst -j BLOCKTRAFFIC
+
+	# Block traffic to blocked domains
+	iptables -t nat -A BLOCKTRAFFIC -p tcp -m set --match-set blocklist dst -j REJECT --reject-with tcp-reset
+	iptables -t nat -A BLOCKTRAFFIC -p udp -m set --match-set blocklist dst -j REJECT --reject-with icmp-port-unreachable
 
 	# bypass local domain
 	iptables -t nat -A REDSOCKS -d $proxy_ip -j RETURN
@@ -66,6 +76,9 @@ start() {
 stop() {
 	service_stop /usr/sbin/redsocks
 	iptables -t nat -D OUTPUT -p tcp -j REDSOCKS
+	iptables -t nat -D OUTPUT -p udp -m set --match-set blocklist dst -j BLOCKTRAFFIC 2>/dev/null
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set blocklist dst -j BLOCKTRAFFIC 2>/dev/null
 	iptables -t nat -D PREROUTING -p tcp -j REDSOCKS
 	iptables -t nat -F REDSOCKS && iptables -t nat -X REDSOCKS
+	iptables -t nat -F BLOCKTRAFFIC && iptables -t nat -X BLOCKTRAFFIC
 }

@@ -42,31 +42,11 @@ reboot
 
 ### Block Domain Feature
 The script now supports blocking specific domains to prevent access. 
+The iptables rules for blocking are handled in `/etc/init.d/redsocks` (24 version).
 You can manage blocked domains in two ways:
 
-#### Method 1: Using the domain manager script
-```bash
-# Block a domain
-/root/TP4OpenW/domain_manager.sh block example.com
-
-# Unblock a domain
-/root/TP4OpenW/domain_manager.sh unblock example.com
-
-# List blocked domains
-/root/TP4OpenW/domain_manager.sh list-blocked
-
-# List allowed domains
-/root/TP4OpenW/domain_manager.sh list-allowed
-
-# Show status
-/root/TP4OpenW/domain_manager.sh status
-
-# Synchronize configurations after manual changes to lists
-/root/TP4OpenW/domain_manager.sh sync
-```
-
-#### Method 2: Manual editing
-Edit the blocklist file directly:
+#### Manual editing
+Edit the blocklist file directly (shared between versions):
 ```bash
 vi /root/TP4OpenW/lists/blocklist
 # Add one domain per line
@@ -74,13 +54,14 @@ vi /root/TP4OpenW/lists/blocklist
 
 After manual editing, run:
 ```bash
+# For both versions
 /root/TP4OpenW/update_conf.sh
 ```
 
 ### Lists location
 - `/root/TP4OpenW/lists/list` - Main GFW list (auto-generated)
 - `/root/TP4OpenW/lists/custom` - Custom proxy list
-- `/root/TP4OpenW/lists/blocklist` - Domains to block
+- `/root/TP4OpenW/lists/blocklist` - Domains to block (shared between versions)
 - `/root/custom.list` - Additional custom list
 
 ### References

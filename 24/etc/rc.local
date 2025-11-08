@@ -4,7 +4,6 @@
 sleep 10
 touch /tmp/system-startup
 
-ipset create gfwlist hash:ip counters timeout 1200
-/root/TP4OpenW/24/update_conf.sh /root/TP4OpenW/lists/list
+/root/TP4OpenW/update_conf.sh /root/TP4OpenW/lists/list
 
 exit 0
