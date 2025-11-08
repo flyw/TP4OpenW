@@ -5,9 +5,11 @@ sleep 10
 touch /tmp/system-startup
 
 ipset create gfwlist hash:ip counters timeout 1200
+ipset create blocklist hash:ip counters timeout 1200
 /root/TP4OpenW/update_conf.sh /root/TP4OpenW/lists/list
 
 iptables -t nat -N REDSOCKS
+iptables -t nat -N BLOCKTRAFFIC
 iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
 iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
 iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
@@ -17,6 +19,13 @@ iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
 iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
 iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
 iptables -t nat -A REDSOCKS -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 12345
+
+# Block traffic to blocked domains
+iptables -t nat -A BLOCKTRAFFIC -p tcp -m set --match-set blocklist dst -j REJECT --reject-with tcp-reset
+iptables -t nat -A BLOCKTRAFFIC -p udp -m set --match-set blocklist dst -j REJECT --reject-with icmp-port-unreachable
+
 iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
+iptables -t nat -A OUTPUT -p tcp -m set --match-set blocklist dst -j BLOCKTRAFFIC
+iptables -t nat -A OUTPUT -p udp -m set --match-set blocklist dst -j BLOCKTRAFFIC
 
 exit 0
