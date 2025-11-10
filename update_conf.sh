@@ -23,7 +23,7 @@ sed "s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 127.0.0.1@45
 
 # Add blocklist domains with forward-addr to a blackhole (localhost:53)
 # This effectively blocks these domains by sending them to nowhere
-sed "s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 127.0.0.1@5353/" /root/TP4OpenW/lists/blocklist >> /var/lib/unbound/unbound_ext.conf
+sed '/./s/.*/forward-zone:\n        name: \"&\"\n        forward-addr: 127.0.0.1@5353/' /root/TP4OpenW/lists/blocklist >> /var/lib/unbound/unbound_ext.conf
 
 echo 'Generate /tmp/dnsmasq.d/gfwlist.conf...'
 echo '' > /tmp/dnsmasq.d/gfwlist.conf
