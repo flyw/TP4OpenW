@@ -18,6 +18,15 @@ iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
 iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
 iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
 iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+
+# 【必须修改】排除代理服务器的公网 IP，防止死循环
+# 请将 1.2.3.4 替换为你实际的代理服务器 IP
+# iptables -t nat -A REDSOCKS -d 1.2.3.4 -j RETURN
+
+# 【核心：默认走代理】
+# 剩下所有的 TCP 流量全部重定向到 12345 端口
+# iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+
 iptables -t nat -A REDSOCKS -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 12345
 
 # Block traffic to blocked domains
