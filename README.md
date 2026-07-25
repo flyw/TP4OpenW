@@ -64,7 +64,7 @@ After manual editing, run:
 - `/root/custom.list` - Additional custom list
 
 ### DNS / Domain Query Tracking
-如果希望查看都需要经过哪些域名，可以使用以下命令进行查询：
+To inspect which domains are requested, use the following command:
 ```bash
 tcpdump -i br-lan -n src 192.168.99.X and port 53
 ```
